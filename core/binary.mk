@@ -261,6 +261,12 @@ endif
 
 my_cppflags := $(my_cpp_std_version) $(my_cppflags)
 
+# Export compiler type for display
+ifneq ($(my_clang),true)
+    my_compiler := gcc
+else
+    my_compiler := clang
+endif
 
 ifeq ($(SDCLANG),true)
     ifeq ($(my_sdclang),)
@@ -676,6 +682,7 @@ $(proto_generated_cpps): PRIVATE_PROTOC_FLAGS := $(LOCAL_PROTOC_FLAGS) $(my_prot
 $(proto_generated_sources): PRIVATE_PROTOC_OUTPUT := $(LOCAL_PROTOC_OUTPUT)
 $(proto_generated_sources): PRIVATE_PROTOC_INPUT := $(LOCAL_PATH)
 $(proto_generated_cpps): PRIVATE_RENAME_CPP_EXT := $(my_rename_cpp_ext)
+$(proto_generated_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 $(proto_generated_cpps): $(proto_gen_dir)/%.pb$(my_proto_source_suffix): %.proto $(my_protoc_deps) $(PROTOC)
 	$(transform-proto-to-cc)
 	$(copy-proto-files)
@@ -930,8 +937,10 @@ $(call track-src-file-obj,$(cpp_normal_sources),$(cpp_normal_objects))
 
 $(dotdot_arm_objects) $(cpp_arm_objects): PRIVATE_ARM_MODE := $(arm_objects_mode)
 $(dotdot_arm_objects) $(cpp_arm_objects): PRIVATE_ARM_CFLAGS := $(arm_objects_cflags)
+$(dotdot_arm_objects) $(cpp_arm_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 $(dotdot_objects) $(cpp_normal_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(dotdot_objects) $(cpp_normal_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
+$(dotdot_objects) $(cpp_normal_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 
 cpp_objects        := $(cpp_arm_objects) $(cpp_normal_objects)
 
@@ -958,6 +967,7 @@ ifneq ($(strip $(gen_cpp_objects)),)
 # TODO: support compiling certain generated files as arm.
 $(gen_cpp_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(gen_cpp_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
+$(gen_cpp_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 $(gen_cpp_objects): $(intermediates)/%.o: \
     $(intermediates)/%$(LOCAL_CPP_EXTENSION) \
     $(my_additional_dependencies)
@@ -1032,8 +1042,10 @@ $(call track-src-file-obj,$(c_normal_sources),$(c_normal_objects))
 
 $(dotdot_arm_objects) $(c_arm_objects): PRIVATE_ARM_MODE := $(arm_objects_mode)
 $(dotdot_arm_objects) $(c_arm_objects): PRIVATE_ARM_CFLAGS := $(arm_objects_cflags)
+$(dotdot_arm_objects) $(c_arm_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 $(dotdot_objects) $(c_normal_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(dotdot_objects) $(c_normal_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
+$(dotdot_objects) $(c_normal_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 
 c_objects        := $(c_arm_objects) $(c_normal_objects)
 
@@ -1059,6 +1071,7 @@ ifneq ($(strip $(gen_c_objects)),)
 # TODO: support compiling certain generated files as arm.
 $(gen_c_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
 $(gen_c_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
+$(gen_c_objects): PRIVATE_COMPILER_ID := $(my_compiler)
 $(gen_c_objects): $(intermediates)/%.o: $(intermediates)/%.c \
     $(my_additional_dependencies)
 	$(transform-$(PRIVATE_HOST)c-to-o)

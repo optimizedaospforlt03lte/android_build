@@ -896,4 +896,7 @@ endif
 ## last, to avoid accidental resetting by device configs
 $(eval include vendor/aosp/sepolicy/sepolicy.mk)
 
+#AOSP Vendor
+$(eval include vendor/aosp/common.mk)
+
 include $(BUILD_SYSTEM)/dumpvar.mk

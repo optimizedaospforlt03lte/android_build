@@ -892,10 +892,6 @@ ifneq ($(TARGET_COPY_FILES_OVERRIDES),)
     PRODUCT_COPY_FILES := $(filter-out $(TARGET_COPY_FILES_OVERRIDES), $(PRODUCT_COPY_FILES))
 endif
 
-## We need to be sure the global selinux policies are included
-## last, to avoid accidental resetting by device configs
-$(eval include vendor/aosp/sepolicy/sepolicy.mk)
-
 #AOSP Vendor
 $(eval include vendor/aosp/common.mk)
 

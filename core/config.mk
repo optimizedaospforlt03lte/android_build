@@ -895,4 +895,6 @@ endif
 #AOSP Vendor
 $(eval include vendor/aosp/common.mk)
 
+include frameworks/base/data/sounds/GoogleAudio.mk
+
 include $(BUILD_SYSTEM)/dumpvar.mk

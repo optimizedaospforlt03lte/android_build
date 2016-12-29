@@ -65,7 +65,47 @@ POLLY := -O3 -mllvm -polly \
 # Disable modules that dont work with Polly. Split up by arch.
 DISABLE_POLLY_arm := \
 libjpeg_static \
-libicuuc
+libicuuc \
+libjpeg_static \
+libicuuc \
+libwebp-decode \
+libwebp-encode \
+libpdfiumfxge \
+libskia_static \
+libaudioutils \
+libpdfium% \
+libLLVMSupport \
+libsvoxpico \
+libRS_internal \
+libvpx \
+libopus \
+libv8 \
+libsonic \
+libaudioflinger \
+libstagefright% \
+libart \
+libF77blas \
+libFFTEm \
+libRSCpuRef \
+libbnnmlowp \
+libmedia_jni \
+libFraunhoferAAC \
+libavcdec \
+libavcenc \
+libmpeg2dec \
+libwebrtc% \
+libmusicbundle \
+libreverb \
+libscrypt_static \
+libmpeg2dec \
+libyuv_static \
+libcrypto% \
+libbtif \
+libgui \
+libpcap \
+libncurses \
+libjni_filtershow_filters \
+libutils%
 
 DISABLE_POLLY_arm64 := \
 libjpeg_static \

@@ -645,6 +645,12 @@ reboot_now("%(bcb_dev)s", "recovery");
 else if get_stage("%(bcb_dev)s") == "3/3" then
 """ % bcb_dev)
 
+  script.Print("   _____     _   _       _           _    _____ _____ _____ _____ ")
+  script.Print("|     |___| |_|_|_____|_|___ ___ _| |  |  _  |     |   __|  _  |  ")
+  script.Print("|  |  | . |  _| |     | |- _| -_| . |  |     |  |  |__   |   __|  ")
+  script.Print("|_____|  _|_| |_|_|_|_|_|___|___|___|  |__|__|_____|_____|__|     ")
+  script.Print("      |_|                                                         ")
+  script.Print("Optimized AOSP 1.0 (Android 7.1.1)")
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 

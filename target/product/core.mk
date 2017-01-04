@@ -38,11 +38,13 @@ PRODUCT_PACKAGES += \
     ExternalStorageProvider \
     FusedLocation \
     InputDevices \
+    KernelAdiutor \
     KeyChain \
     Keyguard \
     LatinIME \
     Launcher3 \
     ManagedProvisioning \
+    messaging \
     MtpDocumentsProvider \
     PicoTts \
     PacProcessor \
@@ -52,6 +54,7 @@ PRODUCT_PACKAGES += \
     ProxyHandler \
     Settings \
     SharedStorageBackup \
+    SnapBrowser \
     StorageManager \
     Telecom \
     TeleService \

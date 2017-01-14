@@ -105,7 +105,10 @@ libgui \
 libpcap \
 libncurses \
 libjni_filtershow_filters \
-libutils%
+libutils% \
+libswresample \
+libswscale \
+libavcodec
 
 DISABLE_POLLY_arm64 := \
 libjpeg_static \
